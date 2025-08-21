@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- BASE (global element styles) ---------- */
+@layer base {
+  /* Typography + scaling sanity */
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    overflow-x: hidden; /* prevent horizontal scroll from rogue children */
+  }
+
+  /* Media should never blow out layouts */
+  img, video, canvas, svg { max-width: 100%; height: auto; }
+
+  /* Heading clamps (kept in base for stable precedence) */
+  h1 { font-size: clamp(1.75rem, 4.0vw, 3rem);   line-height: 1.15; }
+  h2 { font-size: clamp(1.5rem,  3.0vw, 2.25rem); line-height: 1.20; }
+  h3 { font-size: clamp(1.25rem, 2.4vw, 1.75rem); line-height: 1.25; }
+}
+
+/* ---------- KEYFRAMES (top-level is safest) ---------- */
+@keyframes text-breathe {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50%      { transform: translateY(3px); opacity: 1; }
+}
+
+@keyframes wave-down {
+  0%, 100% { transform: translateY(0); opacity: .6; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes underline-reveal {
+  to { width: 100%; }
+}
+
+/* ---------- UTILITIES (custom classes you use in markup) ---------- */
+@layer utilities {
+  /* Animations */
+  .animate-text-breathe { animation: text-breathe 2s ease-in-out infinite; }
+  .animate-wave-down { animation: wave-down 1.5s ease-in-out infinite; }
+  .animate-wave-down-delay { animation: wave-down 1.5s ease-in-out .15s infinite; }
+  .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+  .animate-fade-in-delay { animation: fade-in 1.2s ease-out forwards; }
+
+  /* Text styles */
+  .glow-text { text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+  .underline-text { position: relative; }
+  .underline-text::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -6px;
+    height: 3px; width: 0%;
+    background: linear-gradient(to right, transparent, white, transparent);
+    transition: width 1.2s ease;
+    animation: underline-reveal 1.2s forwards;
+  }
+
+  /* Layout helpers */
+  .page-pad { @apply px-4 sm:px-6; }
+  .stack-md-2 { @apply grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8; }
+  .stack-md-3 { @apply grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8; }
+  .no-overflow { overflow: hidden; }
+  .minw-0 { min-width: 0; } /* use on flex/grid items that wrap weirdly */
+  .hero-wrap { white-space: normal; }
+  @screen md { .hero-wrap { white-space: initial; } }
+
+  /* Defensive container while testing */
+  .container-sane {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ---------- RESPONSIVE FIXES THAT DON’T BELONG TO A LAYER ---------- */
+@media (max-width: 1279px) {
+  .testimonial-rails { display: none !important; }
+}
