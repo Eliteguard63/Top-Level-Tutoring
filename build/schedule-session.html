@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule a Free Session</title>
+
+  <!-- Inter font + Tailwind CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{
+      --cyan:#06b6d4;      /* cyan-500 */
+      --cyan-600:#0891b2;  /* cyan-600 */
+      --indigo:#6366f1;    /* indigo-500 */
+      --violet:#8b5cf6;    /* violet-500 */
+      --bg1:#bae6fd;       /* light cyan */
+      --bg2:#e9d5ff;       /* light violet */
+      --bg3:#c7d2fe;       /* light indigo */
+    }
+
+    /* Animated site background (smooth ping-pong, no snap) */
+    .bg-animated{
+      background: linear-gradient(to right, var(--bg1), var(--bg2), var(--bg3));
+      background-size: 200% 200%;
+      animation: shift 18s linear infinite alternate;
+      position: relative;
+    }
+    .bg-animated::after{
+      content:"";
+      position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(1200px 600px at 50% -200px, rgba(255,255,255,.36), transparent);
+    }
+    @keyframes shift{
+      0%{ background-position: 0% 50%; }
+      100%{ background-position: 100% 50%; }
+    }
+
+    /* Card glow accents (match Parent/Student flows) */
+    .card-glow::before{
+      content:"";
+      position:absolute; inset:-2px; border-radius:1.25rem;
+      background:
+        radial-gradient(500px 200px at -10% -10%, rgba(34,211,238,.18), transparent),
+        radial-gradient(400px 200px at 110% 120%, rgba(139,92,246,.18), transparent);
+      pointer-events:none;
+    }
+
+    /* On-brand gradient CTA with snappy hover */
+    .btn-gradient{
+      background-image: linear-gradient(to right, var(--cyan), var(--indigo));
+      color:#fff; border:1px solid rgba(255,255,255,.22);
+      transition: transform .12s ease-out, box-shadow .12s ease-out, filter .12s ease-out;
+      will-change: transform;
+    }
+    .btn-gradient:hover{
+      filter: brightness(1.05);
+      transform: translateY(-1px) scale(1.015);
+      box-shadow: 0 10px 20px rgba(99,102,241,.18);
+    }
+
+    /* Pretty gradient bullets */
+    .fancy-bullets{ list-style:none; padding-left:0; }
+    .fancy-bullets li{ position:relative; padding-left:1.5rem; }
+    .fancy-bullets li::before{
+      content:"";
+      position:absolute; left:0; top:.6rem;
+      width:.6rem; height:.6rem; border-radius:9999px;
+      background-image: linear-gradient(to right, var(--cyan), var(--violet));
+      box-shadow:0 0 0 3px rgba(6,182,212,.15);
+    }
+  </style>
+</head>
+
+<body class="bg-animated font-[Inter] text-gray-800 min-h-screen flex flex-col">
+  <!-- Top ribbon -->
+  <header class="w-full bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-600 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Schedule Your Free One-Hour Session</h1>
+      <p class="mt-2 text-base sm:text-lg italic font-semibold opacity-95">Let's take the first step toward academic excellence</p>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-grow">
+    <div class="max-w-7xl mx-auto px-6 py-10 sm:py-14 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <!-- Left: Form card -->
+      <section class="relative bg-white/85 backdrop-blur rounded-2xl shadow-xl ring-1 ring-black/10 p-6 sm:p-8 card-glow">
+        <form
+          action="https://formspree.io/f/xblonwwg"
+          method="POST"
+          onsubmit="event.preventDefault(); const form=event.target; const data=new FormData(form); fetch(form.action,{method:form.method, body:data, headers:{Accept:'application/json'}}).then(r=>{ if(r.ok){ window.location.href='/thank-you.html'; } else { alert('Something went wrong. Please try again.'); } });"
+        >
+          <h2 class="text-2xl font-extrabold tracking-tight text-cyan-700 mb-6">Let’s Get Started</h2>
+
+          <div class="space-y-5">
+            <label class="block" for="name">
+              <span class="block mb-1 font-medium">Your Name</span>
+              <input id="name" name="name" type="text" required
+                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-800 outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" />
+            </label>
+
+            <label class="block" for="email">
+              <span class="block mb-1 font-medium">Your Email</span>
+              <input id="email" name="email" type="email" required
+                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-800 outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" />
+            </label>
+
+            <label class="block" for="phone">
+              <span class="block mb-1 font-medium">Phone Number</span>
+              <input id="phone" name="phone" type="tel" required
+                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-800 outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition" />
+            </label>
+
+            <label class="block" for="message">
+              <span class="block mb-1 font-medium">What would you like help with?</span>
+              <textarea id="message" name="message" rows="5" required
+                class="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-800 resize-none outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"></textarea>
+            </label>
+          </div>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+            <button type="submit" class="btn-gradient px-6 py-3 rounded-full font-semibold inline-flex justify-center">
+              Submit Request
+            </button>
+
+            <a href="/"
+   class="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-semibold text-cyan-700 border border-cyan-600/50 bg-white/70 
+          hover:bg-cyan-50 hover:border-cyan-600 transition-colors duration-150 ease-out">
+  ← Return to Home
+</a>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right: Info card -->
+      <section class="relative bg-white/75 backdrop-blur rounded-2xl shadow-xl ring-1 ring-black/10 p-6 sm:p-8 card-glow">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-cyan-700 mb-4">Your First Hour is On Me</h2>
+        <p class="mb-4 text-gray-700">Why I offer a free one-hour session:</p>
+
+        <ul class="fancy-bullets space-y-3 text-gray-800">
+          <li>Get a chance to evaluate how I teach and if it's a good fit.</li>
+          <li>No pressure — explore the service without obligation.</li>
+          <li>See results before committing.</li>
+          <li>Allows me to assess academic needs and build a personalized plan.</li>
+          <li>Builds comfort and trust from the very beginning.</li>
+        </ul>
+
+        <p class="mt-6 text-[#164e63] font-semibold">
+          I’m here to help — let’s build confidence, improve grades, and make learning enjoyable again.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="text-center text-sm text-gray-700 py-8">
+    &copy; 2025 Top Level Tutoring. All rights reserved.
+  </footer>
+</body>
+</html>

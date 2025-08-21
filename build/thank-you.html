@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You</title>
+
+    <!-- Tailwind v2.2 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root{
+        --cyan:#06b6d4;       /* cyan-500 */
+        --cyan-600:#0891b2;   /* cyan-600 */
+        --indigo:#6366f1;     /* indigo-500 */
+        --violet:#8b5cf6;     /* violet-500 */
+        --bg1:#bae6fd;        /* light cyan */
+        --bg2:#e9d5ff;        /* light violet */
+        --bg3:#c7d2fe;        /* light indigo */
+      }
+
+      /* Animated background: smooth ping-pong (no snap) */
+      .bg-animated {
+        background: linear-gradient(to right, var(--bg1), var(--bg2), var(--bg3));
+        background-size: 200% 200%;
+        animation: heroShift 18s linear infinite alternate;
+        position: relative;
+      }
+      .bg-animated::after { /* subtle vignette */
+        content: "";
+        position: absolute; inset: 0;
+        pointer-events: none;
+        background: radial-gradient(1200px 600px at 50% -200px, rgba(255,255,255,.36), transparent);
+      }
+      @keyframes heroShift {
+        0%   { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+      }
+
+      /* Fancy gradient bullets to match site */
+      .fancy-bullets { list-style: none; padding-left: 0; }
+      .fancy-bullets li { position: relative; padding-left: 1.75rem; }
+      .fancy-bullets li::before {
+        content: "";
+        position: absolute; left: 0; top: .6rem;
+        width: .6rem; height: .6rem; border-radius: 9999px;
+        background-image: linear-gradient(to right, var(--cyan), var(--violet));
+        box-shadow: 0 0 0 3px rgba(6,182,212,.15);
+      }
+
+      /* On-brand gradient CTA with crisp hover */
+      .btn-gradient {
+        background-image: linear-gradient(to right, var(--cyan), var(--indigo));
+        color: #fff; border: 1px solid rgba(255,255,255,.22);
+        transition: transform .12s ease-out, box-shadow .12s ease-out, filter .12s ease-out;
+      }
+      .btn-gradient:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px) scale(1.015);
+        box-shadow: 0 10px 20px rgba(99,102,241,.18);
+      }
+
+      /* Soft card glow ring to mirror flows */
+      .card {
+        position: relative;
+      }
+      .card::before {
+        content:"";
+        position: absolute; inset:-2px;
+        border-radius: 1.25rem;
+        background:
+          radial-gradient(500px 200px at -10% -10%, rgba(34,211,238,.18), transparent),
+          radial-gradient(400px 200px at 110% 120%, rgba(139,92,246,.18), transparent);
+        pointer-events:none;
+      }
+    </style>
+  </head>
+
+  <body class="bg-animated text-blue-900 min-h-screen flex flex-col">
+    <!-- Top spacer so card breathes nicely -->
+    <div class="flex-1 flex items-start sm:items-center justify-center px-4 py-10 sm:py-16">
+      <div class="card bg-white rounded-2xl shadow-2xl p-8 sm:p-10 max-w-2xl w-full backdrop-filter backdrop-blur">
+        <div class="mx-auto max-w-xl text-center">
+          <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3 text-cyan-600">
+            Thank You!
+          </h1>
+          <p class="text-base sm:text-lg mb-8 text-cyan-600">
+            Your submission was successful, and I’m excited to begin working with you.
+          </p>
+        </div>
+
+        <div class="mx-auto max-w-xl text-gray-800 space-y-4">
+          <p class="font-medium">Here’s what happens next:</p>
+          <ul class="fancy-bullets space-y-3">
+            <li>I’ll review the subject or academic goals you shared.</li>
+            <li>You’ll receive a phone call from me shortly, or a follow-up email/text.</li>
+            <li>Together, we’ll find a time that works well for you.</li>
+            <li>If we move forward with scheduling a free, one-hour session, I’ll assess your needs and create a plan.</li>
+            <li>You’ll have the chance to ask questions and explore how tutoring can support your goals.</li>
+          </ul>
+
+          <p class="pt-2">
+            I truly look forward to connecting and helping you succeed. Let’s get started!
+          </p>
+
+          <div class="pt-6 text-center">
+            <a
+              href="/"
+              class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold btn-gradient"
+            >
+              ← Return to Homepage
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center text-sm text-gray-600 pb-8 px-4">
+      Top Level Tutoring — Empowering Young Minds
+    </footer>
+  </body>
+</html>

@@ -1,30 +1,23 @@
 module.exports = {
   content: [
-    "./index.html",
-    "./components/**/*.{js,jsx,ts,tsx}",
+     "./index.html",
+     "./components/**/*.{js,jsx,ts,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/**/*.html"
+    "./public/**/*.html"   // 👈 include your HTML files too
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "Inter",
-          "ui-sans-serif",
-          "system-ui",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica",
-          "Arial",
-          "Apple Color Emoji",
-          "Segoe UI Emoji"
-        ]
+        sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "Apple Color Emoji", "Segoe UI Emoji"]
       }
     }
   },
-  safelist: [
+   safelist: [
     { pattern: /(^|\:)(w|h|min-w|min-h|max-w|max-h|text|bg|drop-shadow|mix-blend)-.*/ },
     { pattern: /\[(.+)\]/ }
   ],
-  plugins: []
-};
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}

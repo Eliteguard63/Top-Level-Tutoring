@@ -621,10 +621,6 @@ function NavLinkFancy({ href, children }) {
     </motion.a>
   );
 }
-
-
-
-
   return (
     <div className="font-sans text-gray-800">
       {/* LBCC-style Navbar (mobile-first, desktop preserved) */}
@@ -864,39 +860,41 @@ function NavLinkFancy({ href, children }) {
   </div>
 </section>
 
-      {/* User Type Selection Section – periwinkle gradient */}
-<section className="isolate text-center py-10 px-4 bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
+     {/* User Type Selection Section – periwinkle gradient */}
+<section className="isolate text-center py-12 px-4 bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
   <div
     className="
-      mx-auto max-w-[1700px]
-      grid grid-cols-1 items-center
-      gap-8 md:gap-10
-      lg:[grid-template-columns:minmax(420px,_1fr)_minmax(760px,_auto)_minmax(420px,_1fr)]
+      mx-auto max-w-[1800px]
+      grid items-center gap-8
+      grid-cols-1
+      lg:[grid-template-columns:minmax(0,1fr)_minmax(0,880px)]
+      xl:[grid-template-columns:minmax(0,1fr)_minmax(0,880px)_minmax(0,1fr)]
     "
   >
-    {/* LEFT image — nudge left + slightly larger, keep blend */}
+    {/* LEFT image — show on lg+, scale with viewport */}
     <div className="hidden lg:block overflow-visible justify-self-end">
       <div className="relative">
         <img
           src="/Tutoring Laptop Photo 7.png"
-          alt="Pathway to Success Checklist"
+          alt="Online tutoring preview"
           className="
-            object-contain max-w-none
-            w-[600px] xl:w-[640px] 2xl:w-[680px]
-            -ml-4 xl:-ml-6 2xl:-ml-8
-            mix-blend-darken [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
+            object-contain
+            w-[clamp(360px,32vw,900px)]   /* big on ultrawide, safe on laptops */
+            mix-blend-darken
+            [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
           "
+          loading="lazy"
         />
-        <div className="absolute bottom-1 left-60 bg-white shadow-lg rounded-md px-6 py-4 w-72 text-sm text-gray-700 z-10 border border-gray-200">
+        <div className="absolute bottom-2 left-[clamp(200px,18vw,420px)] bg-white shadow-lg rounded-md px-6 py-4 w-72 text-sm text-gray-700 z-10 border border-gray-200">
           Studies show that online tutoring with interactive whiteboard tools can be just as effective—if not more effective—than in-person teaching.
         </div>
       </div>
     </div>
 
-    {/* CENTER content — truly centered by the grid */}
-    <div className="order-1 lg:order-2 place-self-center mx-auto min-w-0">
-      <div className="flex flex-col items-center gap-6 max-w-[900px]">
-        <h2 className="text-[clamp(22px,4.5vw,36px)] md:text-4xl font-semibold text-gray-900">
+    {/* CENTER content — always centered, allowed to shrink */}
+    <div className="place-self-center mx-auto min-w-0">
+      <div className="flex flex-col items-center gap-6 max-w-[880px]">
+        <h2 className="text-[clamp(22px,4.5vw,40px)] md:text-4xl font-semibold text-gray-900">
           Confidence-building support, proven success.
         </h2>
 
@@ -904,7 +902,6 @@ function NavLinkFancy({ href, children }) {
           Let&apos;s see how I can help you:
         </p>
 
-        {/* Pizazz buttons */}
         <PizazzButton
           icon={GraduationCap}
           onClick={() => setShowStudentFlow(true)}
@@ -920,37 +917,30 @@ function NavLinkFancy({ href, children }) {
           I’m a Parent
         </PizazzButton>
 
-        {/* Quiz: full pill on ≥ sm, compact link on mobile */}
         <div className="mt-3">
-  {/* Desktop/tablet pill */}
-  <QuizTeaserCard
-    className="hidden sm:block mx-auto"
-    onClick={() => setShowQuiz(true)}
-  />
-
-  {/* Mobile link */}
-  <a
-    href="#quiz"
-    onClick={(e) => {
-      e.preventDefault();
-      setShowQuiz(true);
-    }}
-    className="sm:hidden block text-sm font-semibold text-cyan-700 underline underline-offset-4 text-center"
-  >
-    1-minute readiness quiz →
-  </a>
-</div>
+          <QuizTeaserCard
+            className="hidden sm:block mx-auto"
+            onClick={() => setShowQuiz(true)}
+          />
+          <a
+            href="#quiz"
+            onClick={(e) => { e.preventDefault(); setShowQuiz(true); }}
+            className="sm:hidden block text-sm font-semibold text-cyan-700 underline underline-offset-4 text-center"
+          >
+            1-minute readiness quiz →
+          </a>
+        </div>
       </div>
     </div>
 
-    {/* RIGHT image — blends with gradient, a hair more to the right */}
-    <div className="order-2 lg:order-3 hidden lg:flex items-center justify-self-start lg:ml-6 xl:ml-10 2xl:ml-14">
+    {/* RIGHT image — only on XL+, also scales up strongly */}
+    <div className="hidden xl:flex items-center justify-self-start xl:ml-6 2xl:ml-10">
       <img
         src="/ButtonLeft1.png"
         alt="Pathway to Success"
         className="
           object-contain shrink-0
-          w-[320px] lg:w-[360px] xl:w-[420px] 2xl:w-[460px]
+          w-[clamp(300px,24vw,680px)]   /* larger on big/ultrawide displays */
           mix-blend-darken [filter:contrast(1.05)_saturate(1.05)]
           drop-shadow-md
         "
@@ -1185,83 +1175,68 @@ function NavLinkFancy({ href, children }) {
 </section>
 
       
-      {/* Testimonials Section */}
+     {/* Testimonials Section */}
 <section
   id="testimonials"
   className="relative py-16 px-4 bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]"
 >
-  {/* desktop-only accent rails */}
-  <div className="pointer-events-none hidden xl:block absolute left-6 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-violet-200/70 to-transparent" />
-  <div className="pointer-events-none hidden xl:block absolute right-6 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-cyan-200/70 to-transparent" />
-
-  {/* LEFT pills (desktop only) */}
-  <aside className="hidden xl:block absolute inset-y-0 left-0 pointer-events-none z-10">
-    {/* vertically centered stack */}
-    <div className="absolute left-16 2xl:left-20 top-1/2 -translate-y-1/2 flex flex-col gap-5">
-      <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[17px] 2xl:text-[18px] leading-none tracking-[0.01em] whitespace-nowrap min-w-[240px]">
-        ⭐ 4.9/5 average rating
-      </div>
-      <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[17px] 2xl:text-[18px] leading-none tracking-[0.01em] whitespace-nowrap min-w-[240px]">
-        👩‍🎓 50+ students helped
-      </div>
+  {/* Title with side pills */}
+  <div className="flex items-center justify-center gap-6 flex-wrap">
+    {/* Left pill */}
+    <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[16px] sm:text-[17px] leading-none tracking-[0.01em] whitespace-nowrap">
+      ⭐ 4.9/5 average rating
     </div>
-  </aside>
 
-  {/* RIGHT pills (desktop only) */}
-  <aside className="hidden xl:block absolute inset-y-0 right-0 pointer-events-none z-10">
-    {/* vertically centered stack */}
-    <div className="absolute right-16 2xl:right-20 top-1/2 -translate-y-1/2 flex flex-col gap-5 items-end">
-      <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[17px] 2xl:text-[18px] leading-none tracking-[0.01em] whitespace-nowrap min-w-[240px]">
-        ✅ First hour free
-      </div>
-      <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[17px] 2xl:text-[18px] leading-none tracking-[0.01em] whitespace-nowrap min-w-[240px]">
-        📆 Flexible scheduling
-      </div>
+    {/* Title */}
+    <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 text-center">
+      Hear from Satisfied Customers
+    </h2>
+
+    {/* Right pill */}
+    <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[16px] sm:text-[17px] leading-none tracking-[0.01em] whitespace-nowrap">
+      📆 Flexible scheduling
     </div>
-  </aside>
+  </div>
 
-  {/* Title */}
-  <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-blue-900">
-    Hear from Satisfied Customers
-  </h2>
+  {/* Accent underline */}
   <div className="mx-auto mt-2 mb-10 h-1 w-28 bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full" />
 
   {/* Cards grid (3 items: 1 on mobile, 2 on md, 3 on xl) */}
-<div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-  {/* Vanessa Fors */}
-  <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-    <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-    <p className="text-gray-700 italic">
-      I came failing—Arie’s passion for teaching, patience, and mastery helped me exceed every expectation.
-    </p>
-    <p className="mt-4 font-semibold text-gray-800">
-      — Vanessa Fors, STEM Student at Folsom Lake College (Final Grade: B)
-    </p>
-  </div>
+  <div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+    {/* Vanessa Fors */}
+    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
+      <p className="text-gray-700 italic">
+        I came failing—Arie’s passion for teaching, patience, and mastery helped me exceed every expectation.
+      </p>
+      <p className="mt-4 font-semibold text-gray-800">
+        — Vanessa Fors, STEM Student at Folsom Lake College (Final Grade: B)
+      </p>
+    </div>
 
-  {/* Khaled Harris */}
-  <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-    <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-    <p className="text-gray-700 italic">
-      Arie turned difficult subjects into confidence and clarity through patience, knowledge, and encouragement.
-    </p>
-    <p className="mt-4 font-semibold text-gray-800">
-      — Khaled Harris, Pre-med at Folsom Lake College (Final Grade: A)
-    </p>
-  </div>
+    {/* Khaled Harris */}
+    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
+      <p className="text-gray-700 italic">
+        Arie turned difficult subjects into confidence and clarity through patience, knowledge, and encouragement.
+      </p>
+      <p className="mt-4 font-semibold text-gray-800">
+        — Khaled Harris, Pre-med at Folsom Lake College (Final Grade: A)
+      </p>
+    </div>
 
-  {/* Sam Fouret */}
-  <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-    <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-    <p className="text-gray-700 italic">
-      Arie made chemistry understandable—clear, patient, reliable, and far better than any textbook.
-    </p>
-    <p className="mt-4 font-semibold text-gray-800">
-      — Sam Fouret, STEM Student at Folsom Lake College (Final Grade: B)
-    </p>
+    {/* Sam Fouret */}
+    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
+      <p className="text-gray-700 italic">
+        Arie made chemistry understandable—clear, patient, reliable, and far better than any textbook.
+      </p>
+      <p className="mt-4 font-semibold text-gray-800">
+        — Sam Fouret, STEM Student at Folsom Lake College (Final Grade: B)
+      </p>
+    </div>
   </div>
-</div>
-</section> 
+</section>
 
       {/* About Section */}
       <section id="about" className="bg-blue-50 py-12 px-6">

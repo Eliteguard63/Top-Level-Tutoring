@@ -147,11 +147,12 @@ export default function ParentFlow() {
   </a>
 
   {/* Centered text stays in a max-width container */}
-  <div className="mx-auto max-w-7xl px-4 py-3 sm:py-4 text-center">
-    <span className="text-white drop-shadow-md font-semibold text-sm sm:text-base">
-      I'm here to help you succeed!
-    </span>
-  </div>
+  {/* Centered text stays in a max-width container */}
+<div className="mx-auto max-w-7xl px-4 py-3 sm:py-4 text-center">
+  <span className="hidden md:inline text-white drop-shadow-md font-semibold text-sm sm:text-base">
+    I'm here to help you succeed!
+  </span>
+</div>
 </div>
 
       {/* Content */}
