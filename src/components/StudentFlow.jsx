@@ -112,47 +112,54 @@ export default function StudentFlow() {
   const progressPct = Math.round((currentIndex / (totalSteps - 1)) * 100);
 
   return (
-    <div className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Animated gradient background */}
-      <motion.div
-        aria-hidden
-        initial={{ backgroundPosition: "0% 50%" }}
-        animate={{ backgroundPosition: "100% 50%" }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          repeatType: "reverse",   // smooth ping-pong, no snap
-          ease: "linear"
-        }}
-        className="pointer-events-none absolute inset-0 -z-10
-                   bg-gradient-to-r from-cyan-300 via-indigo-300 to-violet-300
-                   bg-[length:200%_200%]"
-      />
-      {/* Subtle vignette */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_50%_-200px,rgba(255,255,255,0.35),transparent)]" />
+  <div className="relative min-h-screen flex flex-col overflow-hidden">
+    {/* Animated gradient background */}
+    <motion.div
+      aria-hidden
+      initial={{ backgroundPosition: "0% 50%" }}
+      animate={{ backgroundPosition: "100% 50%" }}
+      transition={{
+        duration: 18,
+        repeat: Infinity,
+        repeatType: "reverse", // smooth ping-pong, no snap
+        ease: "linear",
+      }}
+      className="pointer-events-none absolute inset-0 -z-10
+                 bg-gradient-to-r from-cyan-300 via-indigo-300 to-violet-300
+                 bg-[length:200%_200%]"
+    />
 
-      {/* Top bar (button flush-left to viewport, no jump, mobile-safe) */}
-<div className="relative w-full bg-[linear-gradient(to_right,_#06b6d4,_#199bb8,_#06b6d4)] shadow-md">
-  {/* Left button is positioned against the bar, not the centered container */}
-  <a
-    href="/"
-    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2
-               inline-flex h-8 sm:h-9 items-center gap-1.5
-               rounded-full border border-white/80 bg-white/0
-               px-3 sm:px-4 text-xs sm:text-sm font-medium
-               text-white/95 hover:bg-white hover:text-cyan-700 hover:shadow-md
-               transition-colors"
-    style={{ lineHeight: "1.25rem" }}  // fixes hover “jump”
-  >
-    ← Back to Home
-  </a>
+    {/* Subtle vignette */}
+    <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_50%_-200px,rgba(255,255,255,0.35),transparent)]" />
 
-  {/* Centered text stays in a max-width container */}
-  <div className="mx-auto max-w-7xl px-4 py-3 sm:py-4 text-center">
-    <span className="text-white drop-shadow-md font-semibold text-sm sm:text-base">
-      I'm here to help you succeed!
-    </span>
-  </div>
+    {/* Top bar (sticky, safe-area-aware, mobile-safe) */}
+    <div
+      className="
+        sticky top-0 z-50 w-full shadow-md
+        bg-[linear-gradient(to_right,_#06b6d4,_#199bb8,_#06b6d4)]
+        pt-[env(safe-area-inset-top)]
+      "
+    >
+      {/* bar content row */}
+      <div className="flex items-center h-12 sm:h-14 px-2 sm:px-4 w-full">
+        {/* Left button */}
+        <a
+          href="/"
+          className="
+            inline-flex items-center gap-1.5
+            h-8 sm:h-9
+            rounded-full border border-white/80
+            px-3 sm:px-4
+            text-xs sm:text-sm font-medium
+            text-white/95 bg-white/0
+            hover:bg-white hover:text-cyan-700 hover:shadow-md
+            transition-colors
+          "
+          style={{ lineHeight: "1.25rem" }} /* keeps text vertically crisp */
+        >
+          ← Back to Home
+        </a>
+      </div>
 </div>
 
       {/* Content */}

@@ -860,40 +860,41 @@ function NavLinkFancy({ href, children }) {
   </div>
 </section>
 
-     {/* User Type Selection Section – periwinkle gradient */}
-<section className="isolate text-center py-12 px-4 bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
+    {/* User Type Selection Section – periwinkle gradient */}
+<section className="isolate text-center py-12 px-4 overflow-x-hidden bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
   <div
     className="
       mx-auto max-w-[1800px]
       grid items-center gap-8
       grid-cols-1
-      lg:[grid-template-columns:minmax(0,1fr)_minmax(0,880px)]
-      xl:[grid-template-columns:minmax(0,1fr)_minmax(0,880px)_minmax(0,1fr)]
+      /* Only create 3 columns on 2XL+ so laptops NEVER show side images */
+      2xl:[grid-template-columns:minmax(0,1fr)_minmax(0,900px)_minmax(0,1fr)]
     "
   >
-    {/* LEFT image — show on lg+, scale with viewport */}
-    <div className="hidden lg:block overflow-visible justify-self-end">
+    {/* LEFT image — show ONLY on very large screens (2xl+) */}
+    <div className="hidden 2xl:block overflow-visible justify-self-end">
       <div className="relative">
         <img
           src="/Tutoring Laptop Photo 7.png"
           alt="Online tutoring preview"
           className="
             object-contain
-            w-[clamp(360px,32vw,900px)]   /* big on ultrawide, safe on laptops */
+            w-[clamp(420px,28vw,980px)]
             mix-blend-darken
             [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
           "
           loading="lazy"
         />
-        <div className="absolute bottom-2 left-[clamp(200px,18vw,420px)] bg-white shadow-lg rounded-md px-6 py-4 w-72 text-sm text-gray-700 z-10 border border-gray-200">
+        {/* keep callout out of center; hide below 2xl automatically by wrapper */}
+        <div className="absolute bottom-5 left-6 bg-white shadow-lg rounded-md px-6 py-4 w-72 text-sm text-gray-700 z-10 border border-gray-200">
           Studies show that online tutoring with interactive whiteboard tools can be just as effective—if not more effective—than in-person teaching.
         </div>
       </div>
     </div>
 
-    {/* CENTER content — always centered, allowed to shrink */}
+    {/* CENTER content — always centered, single column on laptops & below */}
     <div className="place-self-center mx-auto min-w-0">
-      <div className="flex flex-col items-center gap-6 max-w-[880px]">
+      <div className="flex flex-col items-center gap-6 max-w-[900px]">
         <h2 className="text-[clamp(22px,4.5vw,40px)] md:text-4xl font-semibold text-gray-900">
           Confidence-building support, proven success.
         </h2>
@@ -902,26 +903,16 @@ function NavLinkFancy({ href, children }) {
           Let&apos;s see how I can help you:
         </p>
 
-        <PizazzButton
-          icon={GraduationCap}
-          onClick={() => setShowStudentFlow(true)}
-          className="mt-1"
-        >
+        <PizazzButton icon={GraduationCap} onClick={() => setShowStudentFlow(true)} className="mt-1">
           I’m a Student
         </PizazzButton>
 
-        <PizazzButton
-          icon={Users}
-          onClick={() => setShowParentFlow(true)}
-        >
+        <PizazzButton icon={Users} onClick={() => setShowParentFlow(true)}>
           I’m a Parent
         </PizazzButton>
 
         <div className="mt-3">
-          <QuizTeaserCard
-            className="hidden sm:block mx-auto"
-            onClick={() => setShowQuiz(true)}
-          />
+          <QuizTeaserCard className="hidden sm:block mx-auto" onClick={() => setShowQuiz(true)} />
           <a
             href="#quiz"
             onClick={(e) => { e.preventDefault(); setShowQuiz(true); }}
@@ -933,14 +924,14 @@ function NavLinkFancy({ href, children }) {
       </div>
     </div>
 
-    {/* RIGHT image — only on XL+, also scales up strongly */}
-    <div className="hidden xl:flex items-center justify-self-start xl:ml-6 2xl:ml-10">
+    {/* RIGHT image — show ONLY on very large screens (2xl+) */}
+    <div className="hidden 2xl:flex items-center justify-self-start">
       <img
         src="/ButtonLeft1.png"
         alt="Pathway to Success"
         className="
           object-contain shrink-0
-          w-[clamp(300px,24vw,680px)]   /* larger on big/ultrawide displays */
+          w-[clamp(360px,22vw,760px)]
           mix-blend-darken [filter:contrast(1.05)_saturate(1.05)]
           drop-shadow-md
         "
