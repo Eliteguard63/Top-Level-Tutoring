@@ -1,20 +1,21 @@
-﻿# builds (CI makes these)
+# Vercel config
+.vercel
+
+# Build output (never commit these)
 build/
 dist/
 
-# deps & env
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
 node_modules/
-.env
-.env.*
 
-# platform folders
-.vercel/
-.netlify/
-
-# big local files
-public1.zip
-
-# OS/editor junk
+# OS + IDE junk
 .DS_Store
 Thumbs.db
-*.log
+
+# Don’t commit archives or zips
+*.zip
