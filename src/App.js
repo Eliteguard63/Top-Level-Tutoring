@@ -879,9 +879,11 @@ function NavLinkFancy({ href, children }) {
       alt="Online tutoring preview"
       className="
         object-contain
-        w-[clamp(600px,40vw,1380px)]
+        /* a bit smaller overall */
+        w-[clamp(520px,34vw,1180px)]
         max-w-none
-        ultra:translate-x-12       /* more right so nothing clips */
+        /* push the whole thing further right (more into view) */
+        ultra:translate-x-24
         relative z-10
         mix-blend-darken
         [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
@@ -889,14 +891,21 @@ function NavLinkFancy({ href, children }) {
       loading="lazy"
     />
 
-    {/* Caption: fully visible, wider, clearly below */}
-    <div
+    {/* Chat bubble caption */}
+<div 
   className="
     absolute z-20
-    left-[272px] bottom-2             /* pull further right into view */
-    w-[clamp(340px,24vw,460px)]  /* keep it responsive */
-    bg-white border border-gray-200 shadow-lg rounded-md
-    px-7 py-5 text-sm text-gray-700
+    left-[272px] bottom-0      /* lowered just a tad more */
+    w-[clamp(340px,24vw,480px)]
+    rounded-2xl px-6 py-4 text-sm leading-relaxed
+    text-white font-medium
+    shadow-lg
+    bg-gradient-to-r from-indigo-500 to-purple-400   /* darker, but not as heavy as before */
+
+    /* Arrow on TOP */
+    after:content-[''] after:absolute after:-top-2 after:left-10
+    after:w-4 after:h-4 after:rotate-45
+    after:bg-gradient-to-r after:from-indigo-500 after:to-purple-400
   "
 >
   Studies show that online tutoring with interactive whiteboard tools
@@ -980,7 +989,7 @@ function NavLinkFancy({ href, children }) {
         {[
           "Algebra I & II, Advanced Algebra II",
           "Pre-Calculus, AP Calc (AB/BC), Calc I/II",
-          "Geometry & Trigonometry",,
+          "Geometry & Trigonometry",
           "General Chemistry 1/2 and AP Chem",
           "Biology and AP Bio",
           "General Physics & AP Physics (1/2 & C)",
@@ -1035,7 +1044,7 @@ function NavLinkFancy({ href, children }) {
     {/* RIGHT: 3-Step Approach */}
 <div className="order-3 lg:order-3 w-full">
   <h3 className="text-2xl font-bold text-emerald-300 mb-4 tracking-tight">
-    A 3-Step Approach
+    3-Step Approach
   </h3>
   <ul className="space-y-4 text-emerald-100/90">
     <li className="flex gap-3 items-start">
@@ -1079,39 +1088,60 @@ function NavLinkFancy({ href, children }) {
   <div className="max-w-none md:grid md:grid-cols-12 md:gap-10 md:items-start">
 
     {/* LEFT — wider, closer to the edge, less wrapping */}
-    <div className="md:col-span-7 md:pl-10 space-y-10">
-      <div>
-        <h3 className="text-2xl font-bold text-cyan-500 mb-2">Tailored Lesson Plans</h3>
-        <p className="text-lg text-slate-800 leading-relaxed">
-          Utilizing teacher-recommended and student-favored techniques, I present students with a personalized lesson plan
-          which breaks down concepts into manageable, comprehensible pieces, and progresses only after the student has
-          mastered that topic.
-        </p>
-      </div>
+<div className="md:col-span-7 md:pl-10 space-y-6">
 
-      <div>
-        <h3 className="text-2xl font-bold text-blue-600 mb-2">Online Tutoring</h3>
-        <p className="text-lg text-slate-800 leading-relaxed">
-          I offer flexible, remote sessions using Zoom and collaborative tools to make distance learning interactive and
-          highly effective.
-        </p>
-      </div>
+  {/* service card */}
+  <div className="group relative rounded-2xl bg-white/40 ring-1 ring-black/5 p-5 shadow-sm backdrop-blur transition hover:shadow-lg">
+    <h3 className="text-2xl font-bold text-blue-600 flex items-center gap-2">
+      <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500" />
+      Tailored Lesson Plans
+    </h3>
+    <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 transition-all duration-300 group-hover:w-24" />
+    <p className="mt-3 text-lg text-slate-800 leading-relaxed">
+      Utilizing teacher-recommended and student-favored techniques, I present students with a personalized lesson plan
+      which breaks down concepts into manageable, comprehensible pieces, and progresses only after the student has
+      mastered that topic.
+    </p>
+  </div>
 
-      <div>
-        <h3 className="text-2xl font-bold text-cyan-500 mb-2">Academic Coaching</h3>
-        <p className="text-lg text-slate-800 leading-relaxed">
-          Get help with time management, test prep, or college readiness. I've found that a focus on academic coaching
-          helps students develop strategies that stick beyond one course.
-        </p>
-      </div>
+  {/* service card */}
+  <div className="group relative rounded-2xl bg-white/40 ring-1 ring-black/5 p-5 shadow-sm backdrop-blur transition hover:shadow-lg">
+    <h3 className="text-2xl font-bold text-emerald-600 flex items-center gap-2">
+      <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400" />
+      Online Tutoring
+    </h3>
+    <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300 group-hover:w-24" />
+    <p className="mt-3 text-lg text-slate-800 leading-relaxed">
+      I offer flexible, remote sessions using Zoom and collaborative tools to make distance learning interactive and
+      highly effective.
+    </p>
+  </div>
 
-      <div>
-        <h3 className="text-2xl font-bold text-emerald-600 mb-2">Affordable Pricing</h3>
-        <p className="text-lg text-slate-800 leading-relaxed">
-          After your first free hour, ongoing sessions are just $40 per hour—a rate that reflects both quality instruction
-          and accessibility. I strive to make high-quality tutoring available to all students.
-        </p>
-      </div>
+  {/* service card */}
+  <div className="group relative rounded-2xl bg-white/40 ring-1 ring-black/5 p-5 shadow-sm backdrop-blur transition hover:shadow-lg">
+    <h3 className="text-2xl font-bold text-blue-600 flex items-center gap-2">
+      <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500" />
+      Academic Coaching
+    </h3>
+    <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 transition-all duration-300 group-hover:w-24" />
+    <p className="mt-3 text-lg text-slate-800 leading-relaxed">
+      Get help with time management, test prep, or college readiness. I've found that a focus on academic coaching
+      helps students develop strategies that stick beyond one course.
+    </p>
+  </div>
+
+  {/* service card */}
+  <div className="group relative rounded-2xl bg-white/40 ring-1 ring-black/5 p-5 shadow-sm backdrop-blur transition hover:shadow-lg">
+    <h3 className="text-2xl font-bold text-emerald-600 flex items-center gap-2">
+      <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400" />
+      Affordable Pricing
+    </h3>
+    <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300 group-hover:w-24" />
+    <p className="mt-3 text-lg text-slate-800 leading-relaxed">
+      After your first free hour, ongoing sessions are just $40 per hour—a rate that reflects both quality instruction
+      and accessibility. I strive to make high-quality tutoring available to all students.
+    </p>
+  </div>
     </div>
 
     {/* DIVIDER — desktop only */}
@@ -1253,19 +1283,27 @@ function NavLinkFancy({ href, children }) {
 </section>
 
       {/* About Section */}
-      <section id="about" className="bg-blue-50 py-12 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-cyan-500 mb-4">About Top Level Tutoring</h2>
-          <p className="text-lg">
-            Founded by a local, Folsom-based molecular bio major, this service is dedicated to providing compassionate, effective support for learners at all levels. My personal mission is rooted in mentorship, accessibility, and educational success.
-          </p>
-        </div>
-      </section>
+<section
+  id="about"
+  className="bg-[linear-gradient(180deg,#256D85_0%,#2C6480_50%,#325F7A_100%)] py-16 px-6 text-white"
+>
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className="text-3xl font-bold text-cyan-300 mb-4">
+      About Top Level Tutoring
+    </h2>
+    <p className="text-lg text-slate-100 leading-relaxed">
+      Founded by a local, Folsom-based molecular bio major, this service is
+      dedicated to providing compassionate, effective support for learners at
+      all levels. My personal mission is rooted in mentorship, accessibility,
+      and educational success.
+    </p>
+  </div>
+</section>
 
       {/* Contact Section */}
 <section
   id="contact"
-  className="relative bg-gradient-to-r from-cyan-700 via-cyan-400 to-cyan-700 text-white py-20"
+  className="relative bg-[linear-gradient(180deg,#0b2630_0%,#0b2530_30%,#0e2431_100%)] text-white py-20"
 >
   {/* subtle dot pattern */}
   <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
@@ -1381,7 +1419,6 @@ function NavLinkFancy({ href, children }) {
       </aside>
     </div>
   </div>
-
 
   {/* bottom wave */}
   <svg className="absolute bottom-0 left-0 w-full translate-y-1" viewBox="0 0 1440 48" fill="none" aria-hidden="true">
