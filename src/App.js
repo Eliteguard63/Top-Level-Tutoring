@@ -980,8 +980,7 @@ function NavLinkFancy({ href, children }) {
         {[
           "Algebra I & II, Advanced Algebra II",
           "Pre-Calculus, AP Calc (AB/BC), Calc I/II",
-          "Geometry & Trigonometry",
-          "Statistics and AP Stats",
+          "Geometry & Trigonometry",,
           "General Chemistry 1/2 and AP Chem",
           "Biology and AP Bio",
           "General Physics & AP Physics (1/2 & C)",
