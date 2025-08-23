@@ -872,24 +872,38 @@ function NavLinkFancy({ href, children }) {
     "
   >
     {/* LEFT image — only on ultra-wide */}
-    <div className="hidden ultra:block overflow-visible justify-self-end">
-      <div className="relative">
-        <img
-          src="/Tutoring Laptop Photo 7.png"
-          alt="Online tutoring preview"
-          className="
-            object-contain
-            w-[clamp(420px,28vw,980px)]
-            mix-blend-darken
-            [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
-          "
-          loading="lazy"
-        />
-        <div className="absolute bottom-5 left-6 bg-white shadow-lg rounded-md px-6 py-4 w-72 text-sm text-gray-700 z-10 border border-gray-200">
-          Studies show that online tutoring with interactive whiteboard tools can be just as effective—if not more effective—than in-person teaching.
-        </div>
-      </div>
-    </div>
+<div className="hidden ultra:block overflow-visible justify-self-end">
+  <div className="relative">
+    <img
+      src="/Tutoring Laptop Photo 7.png"
+      alt="Online tutoring preview"
+      className="
+        object-contain
+        w-[clamp(600px,40vw,1380px)]
+        max-w-none
+        ultra:translate-x-12       /* more right so nothing clips */
+        relative z-10
+        mix-blend-darken
+        [filter:contrast(1.06)_saturate(1.04)_brightness(1.02)]
+      "
+      loading="lazy"
+    />
+
+    {/* Caption: fully visible, wider, clearly below */}
+    <div
+  className="
+    absolute z-20
+    left-[272px] bottom-2             /* pull further right into view */
+    w-[clamp(340px,24vw,460px)]  /* keep it responsive */
+    bg-white border border-gray-200 shadow-lg rounded-md
+    px-7 py-5 text-sm text-gray-700
+  "
+>
+  Studies show that online tutoring with interactive whiteboard tools
+  can be just as effective—if not more effective—than in-person teaching.
+</div>
+  </div>
+</div>
 
     {/* CENTER content — always visible */}
     <div className="place-self-center mx-auto min-w-0">
