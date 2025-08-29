@@ -1398,7 +1398,7 @@ function NavLinkFancy({ href, children }) {
           {/* small reassurance / alt contact */}
           <p className="text-center text-sm text-slate-600 mt-4">
             Prefer phone? Call or leave a voicemail:{" "}
-            <span className="font-semibold text-slate-700">916-517-9769</span>
+            <span className="font-semibold text-slate-700">530-683-2309</span>
           </p>
         </form>
       </div>
