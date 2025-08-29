@@ -1322,7 +1322,7 @@ function NavLinkFancy({ href, children }) {
       <aside className="hidden lg:flex min-w-0 flex-col gap-4 text-white/90">
         <div className="rounded-xl border border-white/15 bg-white/5 backdrop-blur p-4">
           <p className="text-base font-semibold">Reach me</p>
-          <p className="text-base mt-1 whitespace-normal xl:whitespace-nowrap">📞 916-517-9769</p>
+          <p className="text-base mt-1 whitespace-normal xl:whitespace-nowrap">📞 530-683-2309</p>
           <p className="text-base flex items-center gap-2 whitespace-normal xl:whitespace-nowrap">
             <span className="shrink-0">✉️</span>
             <span>arie@topleveltutoring.com</span>
