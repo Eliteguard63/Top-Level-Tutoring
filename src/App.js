@@ -352,20 +352,27 @@ function ReadinessQuiz({ visible = false, onStudent, onParent, innerRef }) {
               </div>
 
               {/* NEW: route to student/parent flows */}
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <button
-                  onClick={onStudent}
-                  className="inline-flex items-center gap-2 rounded-full bg-indigo-700 hover:bg-indigo-800 px-5 py-3 font-semibold text-white hover:bg-slate-900"
-                >
-                  I’m a Student
-                </button>
-                <button
-                  onClick={onParent}
-                  className="inline-flex items-center gap-2 rounded-full bg-indigo-700 hover:bg-indigo-800 px-5 py-3 font-semibold text-white hover:bg-slate-900"
-                >
-                  I’m a Parent
-                </button>
-              </div>
+<div className="mt-4 flex flex-wrap items-center gap-3">
+  <button
+    onClick={() => {
+      window.location.hash = "student";  // updates URL (/#student)
+      onStudent?.();                     // opens Student flow
+    }}
+    className="inline-flex items-center gap-2 rounded-full bg-indigo-700 hover:bg-indigo-800 px-5 py-3 font-semibold text-white"
+  >
+    I’m a Student
+  </button>
+
+  <button
+    onClick={() => {
+      window.location.hash = "parent";   // updates URL (/#parent)
+      onParent?.();                      // opens Parent flow
+    }}
+    className="inline-flex items-center gap-2 rounded-full bg-indigo-700 hover:bg-indigo-800 px-5 py-3 font-semibold text-white"
+  >
+    I’m a Parent
+  </button>
+</div>
             </div>
 
             {/* quick summary tile */}
@@ -528,6 +535,21 @@ useEffect(() => {
   }
 }, [showQuiz]);
 
+// --- open correct flow when URL hash is present and keep it in sync
+useEffect(() => {
+  const applyHash = () => {
+    const h = (window.location.hash || "").toLowerCase();
+    setShowStudentFlow(h === "#student");
+    setShowParentFlow(h === "#parent");
+
+    // optional: send a PageView event to Meta if pixel is installed
+    if (window.fbq) window.fbq("track", "PageView");
+  };
+
+  applyHash(); // run on page load
+  window.addEventListener("hashchange", applyHash);
+  return () => window.removeEventListener("hashchange", applyHash);
+}, []);
 if (showStudentFlow) return <StudentFlow />;
 if (showParentFlow) return <ParentFlow />;
 
@@ -926,19 +948,25 @@ function NavLinkFancy({ href, children }) {
         </p>
 
         <PizazzButton
-          icon={GraduationCap}
-          onClick={() => setShowStudentFlow(true)}
-          className="mt-1"
-        >
-          I’m a Student
-        </PizazzButton>
+  icon={GraduationCap}
+  onClick={() => {
+    window.location.hash = "student";      // updates URL to .../#student
+    setShowStudentFlow(true);              // shows the Student flow now
+  }}
+  className="mt-1"
+>
+  I’m a Student
+</PizazzButton>
 
-        <PizazzButton
-          icon={Users}
-          onClick={() => setShowParentFlow(true)}
-        >
-          I’m a Parent
-        </PizazzButton>
+<PizazzButton
+  icon={Users}
+  onClick={() => {
+    window.location.hash = "parent";       // updates URL to .../#parent
+    setShowParentFlow(true);               // shows the Parent flow now
+  }}
+>
+  I’m a Parent
+</PizazzButton>
 
        {/* Quiz button: visible on ALL breakpoints, no wrapping */}
 <div className="mt-3">
