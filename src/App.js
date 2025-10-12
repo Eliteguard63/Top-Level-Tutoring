@@ -918,7 +918,7 @@ function NavLinkFancy({ href, children }) {
     <div className="place-self-center mx-auto min-w-0">
       <div className="flex flex-col items-center gap-6 max-w-[900px]">
         <h2 className="text-[clamp(22px,4.5vw,40px)] md:text-4xl font-semibold text-gray-900">
-          Confidence-building support, proven success.
+          Confidence-Building Support for the Greater Sacramento Region.
         </h2>
 
         <p className="text-[clamp(14px,3.6vw,18px)] md:text-lg text-gray-700">
