@@ -539,10 +539,20 @@ useEffect(() => {
 useEffect(() => {
   const applyHash = () => {
     const h = (window.location.hash || "").toLowerCase();
+
+    // show the correct flow based on hash
     setShowStudentFlow(h === "#student");
     setShowParentFlow(h === "#parent");
 
-    // optional: send a PageView event to Meta if pixel is installed
+    // handle #quiz hash: open quiz and scroll into view
+    if (h === "#quiz") {
+      setShowQuiz(true);
+      requestAnimationFrame(() => {
+        quizRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    // optional: Meta Pixel page view tracking
     if (window.fbq) window.fbq("track", "PageView");
   };
 
@@ -978,7 +988,10 @@ function NavLinkFancy({ href, children }) {
       [word-break:keep-all]
       [hyphens:none]
     "
-    onClick={() => setShowQuiz(true)}
+    onClick={() => {
+      window.location.hash = "quiz";  // updates the URL to .../#quiz
+      setShowQuiz(true);              // opens the quiz
+    }}
     aria-label="Start 1-minute Readiness Quiz"
   />
 </div>
