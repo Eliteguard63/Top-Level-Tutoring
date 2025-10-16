@@ -893,7 +893,15 @@ function NavLinkFancy({ href, children }) {
 </section>
 
     {/* User Type Selection Section – periwinkle gradient */}
-<section className="isolate text-center py-12 px-4 overflow-x-hidden bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
+<section className="relative isolate text-center py-12 px-4 overflow-x-hidden bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]">
+  <div
+    className="
+      relative z-10
+      mx-auto max-w-[2000px]
+      grid items-center gap-8 grid-cols-1
+      ultra:[grid-template-columns:minmax(0,1fr)_minmax(0,900px)_minmax(0,1fr)]
+    "
+  ></div>
   <div
     className="
       mx-auto max-w-[2000px]
@@ -998,20 +1006,20 @@ function NavLinkFancy({ href, children }) {
       </div>
     </div>
 
-    {/* RIGHT image — only on ultra-wide */}
-    <div className="hidden ultra:flex items-center justify-self-start">
-      <img
-        src="/ButtonLeft1.png"
-        alt="Pathway to Success"
-        className="
-          object-contain shrink-0
-          w-[clamp(360px,22vw,760px)]
-          mix-blend-darken [filter:contrast(1.05)_saturate(1.05)]
-          drop-shadow-md
-        "
-        loading="lazy"
-      />
-    </div>
+   <div className="hidden ultra:flex items-center justify-self-start">
+  <img
+    src="/ButtonLeft1.png"
+    alt="Pathway to Success"
+    className="
+      object-contain shrink-0
+      w-[clamp(420px,25vw,880px)]
+      -translate-x-6 ultra:-translate-x-10
+      mix-blend-darken [filter:contrast(1.05)_saturate(1.05)]
+      drop-shadow-md
+    "
+    loading="lazy"
+  />
+</div>
   </div>
 </section>
 
