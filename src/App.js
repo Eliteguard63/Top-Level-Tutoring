@@ -1483,9 +1483,18 @@ function NavLinkFancy({ href, children }) {
 />
 
       {/* Footer */}
-      <footer className="bg-gray-100 text-center py-6 text-sm text-gray-600">
-        <p>&copy; {new Date().getFullYear()} Top Level Tutoring. All rights reserved.</p>
-      </footer>
+<footer className="bg-gray-100 text-center py-6 text-sm text-gray-600">
+  <p>&copy; {new Date().getFullYear()} Top Level Tutoring. All rights reserved.</p>
+
+  <p className="mt-2">
+    <a 
+      href="/privacy-policy.html" 
+      className="text-gray-500 hover:text-gray-800"
+    >
+      Privacy Policy
+    </a>
+  </p>
+</footer>
     </div>
   );
 }
