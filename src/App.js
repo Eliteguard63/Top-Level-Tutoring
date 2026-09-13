@@ -1026,9 +1026,7 @@ function NavLinkFancy({ href, children }) {
 
       {/* Student Flow Conditional Render - removed from here */}
 
-      <div className="bg-green-600 text-white text-center font-bold text-xl py-4">
-  GOOGLE REVIEWS PREVIEW BRANCH
-</div>
+
 <GoogleReviews />
 
       {/* Video Section – modernized with particles + quiz CTA */}
