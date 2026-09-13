@@ -1,4 +1,5 @@
 import StudentFlow from "./components/StudentFlow";
+import GoogleReviews from "./components/GoogleReviews";
 import ParentFlow from "./components/ParentFlow";
 import { Typewriter } from 'react-simple-typewriter'
 import TypewriterList from './components/TypewriterList'
