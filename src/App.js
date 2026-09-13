@@ -1026,6 +1026,10 @@ function NavLinkFancy({ href, children }) {
 
       {/* Student Flow Conditional Render - removed from here */}
 
+      <div className="bg-green-600 text-white text-center font-bold text-xl py-4">
+  GOOGLE REVIEWS PREVIEW BRANCH
+</div>
+
       {/* Video Section – modernized with particles + quiz CTA */}
 <section id="video" className="relative w-full bg-[linear-gradient(180deg,#0b2630_0%,#0b2530_30%,#0e2431_100%)] py-14 sm:py-16">
   {/* ✨ floating glow background */}
@@ -1499,5 +1503,3 @@ function NavLinkFancy({ href, children }) {
     </div>
   );
 }
-
-// PREVIEW_BRANCH_TEST
