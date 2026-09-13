@@ -1025,10 +1025,6 @@ function NavLinkFancy({ href, children }) {
 </section>
 
       {/* Student Flow Conditional Render - removed from here */}
-<div className="bg-red-600 text-white text-center font-bold text-2xl py-6">
-  GOOGLE REVIEWS TEST — IF YOU SEE THIS, NEW FRONTEND IS DEPLOYED
-</div>
-      <GoogleReviews />
 
       {/* Video Section – modernized with particles + quiz CTA */}
 <section id="video" className="relative w-full bg-[linear-gradient(180deg,#0b2630_0%,#0b2530_30%,#0e2431_100%)] py-14 sm:py-16">
