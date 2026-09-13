@@ -1,10 +1,30 @@
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import {
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export default function GoogleReviews() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  const trackRef = useRef(null);
+
+  /* =========================
+     LOAD GOOGLE REVIEW DATA
+     ========================= */
   useEffect(() => {
     async function loadReviews() {
       try {
@@ -29,9 +49,201 @@ export default function GoogleReviews() {
 
   const reviews = data?.reviews || [];
 
+  /* =========================
+     RESPONSIVE CARD COUNT
+     ========================= */
+  useEffect(() => {
+    function updateVisibleCount() {
+      if (window.innerWidth >= 1024) {
+        setVisibleCount(3);
+      } else if (window.innerWidth >= 640) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(1);
+      }
+    }
+
+    updateVisibleCount();
+
+    window.addEventListener("resize", updateVisibleCount);
+
+    return () => {
+      window.removeEventListener("resize", updateVisibleCount);
+    };
+  }, []);
+
+  /* =========================
+     REDUCED MOTION
+     ========================= */
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    const updateMotionPreference = () => {
+      setReducedMotion(mediaQuery.matches);
+    };
+
+    updateMotionPreference();
+
+    mediaQuery.addEventListener?.(
+      "change",
+      updateMotionPreference
+    );
+
+    return () => {
+      mediaQuery.removeEventListener?.(
+        "change",
+        updateMotionPreference
+      );
+    };
+  }, []);
+
+  const maxIndex = Math.max(
+    0,
+    reviews.length - visibleCount
+  );
+
+  /* =========================
+     SCROLL TO CARD
+     ========================= */
+  const scrollToIndex = useCallback(
+    (requestedIndex) => {
+      const track = trackRef.current;
+
+      if (!track || reviews.length === 0) {
+        return;
+      }
+
+      const targetIndex = Math.max(
+        0,
+        Math.min(requestedIndex, maxIndex)
+      );
+
+      const card = track.children[targetIndex];
+
+      if (!card) {
+        return;
+      }
+
+      const left =
+        card.offsetLeft - track.offsetLeft;
+
+      track.scrollTo({
+        left,
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+
+      setCurrentIndex(targetIndex);
+    },
+    [maxIndex, reducedMotion, reviews.length]
+  );
+
+  /* =========================
+     PREVIOUS / NEXT
+     ========================= */
+  function previousReview() {
+    if (currentIndex <= 0) {
+      scrollToIndex(maxIndex);
+    } else {
+      scrollToIndex(currentIndex - 1);
+    }
+  }
+
+  function nextReview() {
+    if (currentIndex >= maxIndex) {
+      scrollToIndex(0);
+    } else {
+      scrollToIndex(currentIndex + 1);
+    }
+  }
+
+  /* =========================
+     KEEP INDEX VALID ON RESIZE
+     ========================= */
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      scrollToIndex(maxIndex);
+    }
+  }, [
+    currentIndex,
+    maxIndex,
+    scrollToIndex,
+  ]);
+
+  /* =========================
+     DETECT MANUAL SWIPING
+     ========================= */
+  function handleScroll() {
+    const track = trackRef.current;
+
+    if (!track || !track.children.length) {
+      return;
+    }
+
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+
+    Array.from(track.children).forEach(
+      (card, index) => {
+        if (index > maxIndex) {
+          return;
+        }
+
+        const cardLeft =
+          card.offsetLeft - track.offsetLeft;
+
+        const distance = Math.abs(
+          track.scrollLeft - cardLeft
+        );
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestIndex = index;
+        }
+      }
+    );
+
+    setCurrentIndex(nearestIndex);
+  }
+
+  /* =========================
+     AUTO ADVANCE
+     ========================= */
+  useEffect(() => {
+    if (
+      paused ||
+      reducedMotion ||
+      reviews.length <= visibleCount ||
+      maxIndex <= 0
+    ) {
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      if (currentIndex >= maxIndex) {
+        scrollToIndex(0);
+      } else {
+        scrollToIndex(currentIndex + 1);
+      }
+    }, 6500);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [
+    currentIndex,
+    maxIndex,
+    paused,
+    reducedMotion,
+    reviews.length,
+    scrollToIndex,
+    visibleCount,
+  ]);
+
   return (
     <section className="relative overflow-hidden bg-white py-14 sm:py-16">
-      {/* soft background glows */}
+      {/* SOFT BACKGROUND GLOWS */}
       <div
         className="
           pointer-events-none absolute inset-0
@@ -40,7 +252,10 @@ export default function GoogleReviews() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
-        {/* HEADER */}
+
+        {/* =====================
+            HEADER
+            ===================== */}
         <div className="text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             What Students & Parents Are Saying
@@ -60,6 +275,7 @@ export default function GoogleReviews() {
 
           {data && (
             <div className="mt-5 flex flex-col items-center">
+
               {/* GOOGLE WORDMARK */}
               <img
                 src="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
@@ -93,15 +309,53 @@ export default function GoogleReviews() {
           )}
         </div>
 
-        {/* REVIEW TRACK */}
+        {/* =====================
+            CAROUSEL
+            ===================== */}
         {reviews.length > 0 && (
-          <div className="mt-10">
+          <div
+            className="relative mt-10"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={() => setPaused(false)}
+          >
+
+            {/* LEFT ARROW */}
+            {reviews.length > visibleCount && (
+              <button
+                type="button"
+                onClick={previousReview}
+                aria-label="Show previous Google reviews"
+                className="
+                  absolute left-0 top-1/2 z-20
+                  -translate-x-1/3 -translate-y-1/2
+                  rounded-full bg-white p-3
+                  shadow-lg ring-1 ring-slate-200
+                  transition
+                  hover:scale-105 hover:bg-slate-50
+                  active:scale-95
+                  sm:-translate-x-1/2
+                "
+              >
+                <ChevronLeft className="h-5 w-5 text-slate-800" />
+              </button>
+            )}
+
+            {/* REVIEW TRACK */}
             <div
+              ref={trackRef}
+              onScroll={handleScroll}
+              onPointerDown={() => setPaused(true)}
+              onPointerUp={() => setPaused(false)}
+              onPointerCancel={() => setPaused(false)}
               className="
-                flex snap-x snap-mandatory gap-5
-                overflow-x-auto scroll-smooth pb-5
-                [scrollbar-width:thin]
-                [scrollbar-color:rgb(148_163_184)_transparent]
+                flex cursor-grab snap-x snap-mandatory gap-5
+                overflow-x-auto scroll-smooth
+                px-1 pb-5
+                active:cursor-grabbing
+                [scrollbar-width:none]
+                [&::-webkit-scrollbar]:hidden
               "
             >
               {reviews.map((review) => (
@@ -119,6 +373,7 @@ export default function GoogleReviews() {
                     hover:-translate-y-1 hover:shadow-xl
                   "
                 >
+
                   {/* AUTHOR */}
                   <div className="flex items-center gap-3">
                     {review.authorAttribution?.photoUri && (
@@ -170,7 +425,8 @@ export default function GoogleReviews() {
 
                   {/* REVIEW TEXT */}
                   <p className="mt-5 flex-1 whitespace-pre-line text-left text-[15px] leading-7 text-slate-700">
-                    “{review.text?.text || "Review text unavailable."}”
+                    “{review.text?.text ||
+                      "Review text unavailable."}”
                   </p>
 
                   {/* ORIGINAL REVIEW */}
@@ -187,7 +443,10 @@ export default function GoogleReviews() {
                       "
                     >
                       View original review on Google
-                      <span className="ml-1" aria-hidden="true">
+                      <span
+                        className="ml-1"
+                        aria-hidden="true"
+                      >
                         ↗
                       </span>
                     </a>
@@ -196,16 +455,69 @@ export default function GoogleReviews() {
               ))}
             </div>
 
-            {/* swipe hint */}
-            <p className="mt-1 text-center text-xs text-slate-400 sm:hidden">
+            {/* RIGHT ARROW */}
+            {reviews.length > visibleCount && (
+              <button
+                type="button"
+                onClick={nextReview}
+                aria-label="Show next Google reviews"
+                className="
+                  absolute right-0 top-1/2 z-20
+                  translate-x-1/3 -translate-y-1/2
+                  rounded-full bg-white p-3
+                  shadow-lg ring-1 ring-slate-200
+                  transition
+                  hover:scale-105 hover:bg-slate-50
+                  active:scale-95
+                  sm:translate-x-1/2
+                "
+              >
+                <ChevronRight className="h-5 w-5 text-slate-800" />
+              </button>
+            )}
+
+            {/* PAGINATION DOTS */}
+            {maxIndex > 0 && (
+              <div className="mt-3 flex items-center justify-center gap-2">
+                {Array.from({
+                  length: maxIndex + 1,
+                }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => scrollToIndex(index)}
+                    aria-label={`Show review group ${index + 1}`}
+                    aria-current={
+                      currentIndex === index
+                        ? "true"
+                        : undefined
+                    }
+                    className={`
+                      h-2.5 rounded-full transition-all duration-300
+                      ${
+                        currentIndex === index
+                          ? "w-7 bg-cyan-600"
+                          : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                      }
+                    `}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* MOBILE SWIPE HINT */}
+            <p className="mt-3 text-center text-xs text-slate-400 sm:hidden">
               Swipe to see more reviews
             </p>
           </div>
         )}
 
-        {/* BOTTOM ACTIONS */}
+        {/* =====================
+            BOTTOM ACTIONS
+            ===================== */}
         {data && (
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+
             {data.googleMapsLinks?.reviewsUri && (
               <a
                 href={data.googleMapsLinks.reviewsUri}
@@ -241,11 +553,14 @@ export default function GoogleReviews() {
           </div>
         )}
 
-        {/* ATTRIBUTION */}
+        {/* =====================
+            ATTRIBUTION
+            ===================== */}
         {data && (
           <p className="mx-auto mt-5 max-w-2xl text-center text-xs leading-relaxed text-slate-400">
-            Reviews provided by Google Maps. Reviewer information, ratings,
-            dates, and review text are shown from Google review data.
+            Reviews provided by Google Maps. Reviewer information,
+            ratings, dates, and review text are shown from Google
+            review data.
           </p>
         )}
       </div>
