@@ -1271,69 +1271,6 @@ function NavLinkFancy({ href, children }) {
 </div>
 </section>
 
-      
-     {/* Testimonials Section */}
-<section
-  id="testimonials"
-  className="relative py-16 px-4 bg-[linear-gradient(to_right,_#c7d2fe,_#e9d5ff,_#bae6fd)]"
->
-  {/* Title with side pills */}
-  <div className="flex items-center justify-center gap-6 flex-wrap">
-    {/* Left pill */}
-    <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[16px] sm:text-[17px] leading-none tracking-[0.01em] whitespace-nowrap">
-      ⭐ 4.9/5 average rating
-    </div>
-
-    {/* Title */}
-    <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-900 text-center">
-      Hear from Satisfied Customers
-    </h2>
-
-    {/* Right pill */}
-    <div className="pointer-events-auto inline-flex items-center justify-center px-6 py-3 rounded-full shadow-xl ring-1 ring-white/20 bg-[#6f72a4]/95 text-white font-semibold text-[16px] sm:text-[17px] leading-none tracking-[0.01em] whitespace-nowrap">
-      📆 Flexible scheduling
-    </div>
-  </div>
-
-  {/* Accent underline */}
-  <div className="mx-auto mt-2 mb-10 h-1 w-28 bg-gradient-to-r from-cyan-400 to-violet-400 rounded-full" />
-
-  {/* Cards grid (3 items: 1 on mobile, 2 on md, 3 on xl) */}
-  <div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-    {/* Vanessa Fors */}
-    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-      <p className="text-gray-700 italic">
-        I came failing—Arie’s passion for teaching, patience, and mastery helped me exceed every expectation.
-      </p>
-      <p className="mt-4 font-semibold text-gray-800">
-        — Vanessa Fors, STEM Student at Folsom Lake College (Final Grade: B)
-      </p>
-    </div>
-
-    {/* Khaled Harris */}
-    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-      <p className="text-gray-700 italic">
-        Arie turned difficult subjects into confidence and clarity through patience, knowledge, and encouragement.
-      </p>
-      <p className="mt-4 font-semibold text-gray-800">
-        — Khaled Harris, Pre-med at Folsom Lake College (Final Grade: A)
-      </p>
-    </div>
-
-    {/* Sam Fouret */}
-    <div className="group relative bg-white p-6 rounded-lg border-2 border-blue-500/70 ring-1 ring-blue-200/30 shadow transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
-      <span className="absolute -top-3 -left-3 h-10 w-10 md:h-11 md:w-11 rounded-full bg-cyan-500 text-white grid place-items-center text-2xl md:text-3xl shadow-sm">“</span>
-      <p className="text-gray-700 italic">
-        Arie made chemistry understandable—clear, patient, reliable, and far better than any textbook.
-      </p>
-      <p className="mt-4 font-semibold text-gray-800">
-        — Sam Fouret, STEM Student at Folsom Lake College (Final Grade: B)
-      </p>
-    </div>
-  </div>
-</section>
 
       {/* About Section */}
 <section
