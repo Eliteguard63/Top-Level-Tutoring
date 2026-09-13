@@ -27,40 +27,88 @@ export default function GoogleReviews() {
     loadReviews();
   }, []);
 
+  const review = data?.reviews?.[0];
+
   return (
-    <section className="bg-white py-12">
-      <div className="mx-auto max-w-6xl px-4 text-center">
-        <h2 className="text-3xl font-bold text-slate-900">
-          What Students & Parents Are Saying
-        </h2>
+    <section className="bg-white py-14">
+      <div className="mx-auto max-w-6xl px-4">
 
-        {loading && (
-          <p className="mt-4 text-slate-500">
-            Loading Google reviews...
-          </p>
-        )}
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-slate-900">
+            What Students & Parents Are Saying
+          </h2>
 
-        {error && (
-          <div className="mt-4 rounded-lg bg-red-100 p-4 text-red-800">
-            Google reviews error: {error}
-          </div>
-        )}
+          {loading && (
+            <p className="mt-4 text-slate-500">
+              Loading Google reviews...
+            </p>
+          )}
 
-        {data && (
-          <div className="mt-5">
-            <div className="text-2xl font-bold text-slate-900">
-              ⭐ {data.rating} / 5
+          {error && (
+            <div className="mt-4 rounded-lg bg-red-100 p-4 text-red-800">
+              Google reviews error: {error}
+            </div>
+          )}
+
+          {data && (
+            <div className="mt-4">
+              <div className="text-xl font-bold text-slate-900">
+                ⭐ {data.rating} / 5
+              </div>
+
+              <p className="mt-1 text-slate-600">
+                Based on {data.userRatingCount} Google reviews
+              </p>
+            </div>
+          )}
+        </div>
+
+        {review && (
+          <div className="mx-auto mt-8 max-w-xl rounded-2xl bg-slate-50 p-6 shadow-lg ring-1 ring-slate-200">
+
+            <div className="flex items-center gap-3">
+              {review.authorAttribution?.photoUri && (
+                <img
+                  src={review.authorAttribution.photoUri}
+                  alt=""
+                  className="h-12 w-12 rounded-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              )}
+
+              <div>
+                <div className="font-bold text-slate-900">
+                  {review.authorAttribution?.displayName || "Google reviewer"}
+                </div>
+
+                <div className="text-sm text-slate-500">
+                  {review.relativePublishTimeDescription}
+                </div>
+              </div>
             </div>
 
-            <p className="mt-2 text-slate-600">
-              Based on {data.userRatingCount} Google reviews
+            <div className="mt-4 text-lg">
+              {"★".repeat(review.rating || 0)}
+            </div>
+
+            <p className="mt-4 whitespace-pre-line leading-7 text-slate-700">
+              “{review.text?.text || "Review text unavailable."}”
             </p>
 
-            <p className="mt-2 text-sm text-emerald-700 font-semibold">
-              Google review data loaded successfully.
-            </p>
+            {review.googleMapsUri && (
+              <a
+                href={review.googleMapsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-block font-semibold text-cyan-700 hover:text-cyan-900"
+              >
+                View original review on Google →
+              </a>
+            )}
+
           </div>
         )}
+
       </div>
     </section>
   );
