@@ -859,7 +859,7 @@ function NavLinkFancy({ href, children }) {
           </h2>
           <p className="mb-4 text-[clamp(14px,3.8vw,20px)] md:text-[20px] leading-relaxed md:leading-relaxed">
             Get personalized support from a local tutor who understands your goals. Whether you or your
-            student need help with a specific class or want to build strong academic habits, I am here to help.
+            student need help with a specific class or want to build strong academic habits, we are here to help.
           </p>
 
           {/* CTA row */}
@@ -963,7 +963,7 @@ function NavLinkFancy({ href, children }) {
         </h2>
 
         <p className="text-[clamp(14px,3.6vw,18px)] md:text-lg text-gray-700">
-          Let&apos;s see how I can help you:
+          Let&apos;s see how we can help you:
         </p>
 
         <PizazzButton
@@ -1151,7 +1151,7 @@ function NavLinkFancy({ href, children }) {
     </h3>
     <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 transition-all duration-300 group-hover:w-24" />
     <p className="mt-3 text-lg text-slate-800 leading-relaxed">
-      Utilizing teacher-recommended and student-favored techniques, I present students with a personalized lesson plan
+      Utilizing teacher-recommended and student-favored techniques, we present students with a personalized lesson plan
       which breaks down concepts into manageable, comprehensible pieces, and progresses only after the student has
       mastered that topic.
     </p>
@@ -1165,7 +1165,7 @@ function NavLinkFancy({ href, children }) {
     </h3>
     <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300 group-hover:w-24" />
     <p className="mt-3 text-lg text-slate-800 leading-relaxed">
-      I offer flexible, remote sessions using Zoom and collaborative tools to make distance learning interactive and
+      We offer flexible, remote sessions using Zoom and collaborative tools to make distance learning interactive and
       highly effective.
     </p>
   </div>
@@ -1192,7 +1192,7 @@ function NavLinkFancy({ href, children }) {
     <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300 group-hover:w-24" />
     <p className="mt-3 text-lg text-slate-800 leading-relaxed">
       After your first free hour, ongoing sessions are just $40 per hour—a rate that reflects both quality instruction
-      and accessibility. I strive to make high-quality tutoring available to all students.
+      and accessibility. We strive to make high-quality tutoring available to all students.
     </p>
   </div>
     </div>
