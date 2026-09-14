@@ -1178,7 +1178,7 @@ function NavLinkFancy({ href, children }) {
     </h3>
     <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 transition-all duration-300 group-hover:w-24" />
     <p className="mt-3 text-lg text-slate-800 leading-relaxed">
-      Get help with time management, test prep, or college readiness. I've found that a focus on academic coaching
+      Get help with time management, test prep, or college readiness. We've found that a focus on academic coaching
       helps students develop strategies that stick beyond one course.
     </p>
   </div>
