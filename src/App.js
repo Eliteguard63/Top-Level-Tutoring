@@ -703,7 +703,7 @@ function NavLinkFancy({ href, children }) {
           href="/schedule-session.html"
           className="hidden lg:inline-flex items-center rounded-full bg-cyan-600 px-4 py-2 text-white font-semibold hover:bg-cyan-700 shadow-sm"
         >
-          Free hour
+          New Students!
         </a>
       </div>
     </div>
@@ -816,7 +816,7 @@ function NavLinkFancy({ href, children }) {
             onClick={() => setNavOpen(false)}
             className="inline-flex w-full items-center justify-center rounded-full bg-cyan-600 py-3 text-white font-semibold shadow-sm hover:bg-cyan-700 active:scale-[0.99] transition"
           >
-            Book your free hour
+            Book your first session
           </a>
         </div>
       </aside>
@@ -1191,7 +1191,7 @@ function NavLinkFancy({ href, children }) {
     </h3>
     <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300 group-hover:w-24" />
     <p className="mt-3 text-lg text-slate-800 leading-relaxed">
-      After your first free hour, ongoing sessions are just $40 per hour—a rate that reflects both quality instruction
+      After your first $20 hour, ongoing sessions are just $40 per hour—a rate that reflects both quality instruction
       and accessibility. We strive to make high-quality tutoring available to all students.
     </p>
   </div>
