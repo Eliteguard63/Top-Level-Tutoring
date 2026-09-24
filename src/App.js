@@ -1246,7 +1246,7 @@ function NavLinkFancy({ href, children }) {
     <div className="mt-6 grid grid-cols-2 gap-3">
       <div className="rounded-xl p-4 text-center bg-gradient-to-br from-indigo-500 to-cyan-500 text-white">
         <div className="text-sm opacity-90">First Hour</div>
-        <div className="text-lg font-semibold">FREE</div>
+        <div className="text-lg font-semibold">ONLY $20</div>
       </div>
       <div className="rounded-xl p-4 text-center bg-slate-900 text-white">
         <div className="text-sm opacity-90">Ongoing Rate</div>
