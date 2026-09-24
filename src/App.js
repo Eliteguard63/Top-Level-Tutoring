@@ -342,7 +342,7 @@ function ReadinessQuiz({ visible = false, onStudent, onParent, innerRef }) {
                   href="/schedule-session.html"
                   className="inline-flex items-center gap-2 rounded-full bg-cyan-600 px-5 py-3 font-semibold text-white hover:bg-cyan-500"
                 >
-                  Book your free hour
+                  Book your first session
                 </a>
                 <button
                   onClick={reset}
@@ -868,7 +868,7 @@ function NavLinkFancy({ href, children }) {
               href="/schedule-session.html"
               className="inline-block bg-cyan-500 text-white px-5 sm:px-6 py-2.5 rounded font-semibold hover:bg-blue-900 text-[clamp(14px,3.6vw,18px)] md:text-lg"
             >
-              Schedule a Free, One-hour Session !
+              Schedule Your First Tutoring Session !
             </a>
 
             {/* Overview button — hidden on mobile, shown ≥ sm */}
@@ -1258,7 +1258,7 @@ function NavLinkFancy({ href, children }) {
   href="/schedule-session.html"
   className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-cyan-600 px-5 py-3 text-white font-semibold shadow hover:bg-cyan-700 transition"
 >
-  Schedule Your Free Hour
+  Schedule Your First Session!
 </a>
 
     <p className="mt-2 text-xs text-slate-500 text-center">
